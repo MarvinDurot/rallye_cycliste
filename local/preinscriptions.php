@@ -16,20 +16,26 @@ $mesInscriptions = new InscriptionsDAO($connector);
 function afficherPreinscription(){
 	global $mesPreinscriptions;
 	echo '<table>';
+	$i=0;
 	if(isset($_POST['rechercher'])){
 		$inscriveur = $_POST['mail'];
 		$lesPreinscrits = $mesPreinscriptions->getPreInscritpionParEmail($inscriveur);
 		foreach ($lesPreinscrits as $unPreinscrit){
 			echo '<tr><td>'.$unPreinscrit->nom.'</td><td>'.$unPreinscrit->prenom.'</td></tr>';
+			$i++;
 		}
-		echo '</table>';
+		if($i!==0){
+			echo '<thead><tr><th>Nom</th><th>Prénom</th></tr></thead>';
+			afficherBouttonValidation();
+		}else{
+			echo "Il n'y a pas de préinscritpion pour cette adresse mail";
+		}
 	}
+	echo '</table>';
 }
 
 function afficherBouttonValidation(){
-	if(isset($_POST['rechercher'])){
-		echo '<form action="preinscriptions.php" method="post"><input type="submit" value="valider" name="valider"/><input type="hidden" value="'.$_POST['mail'].'" name="mail"/></form>';
-	}
+	echo '<form action="preinscriptions.php" method="post"><input type="submit" value="valider" name="valider"/><input type="hidden" value="'.$_POST['mail'].'" name="mail"/></form>';
 }
 
 
@@ -78,8 +84,7 @@ if(isset($_POST['valider'])){
 			</form>
 		</div>
 		<div>
-				<?php afficherPreinscription();
-					afficherBouttonValidation();?>
+				<?php afficherPreinscription();?>
 		</div>
 	</div>
 </body>

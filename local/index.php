@@ -36,6 +36,13 @@ function afficherStatsParcours($type){
 <html>
 <head>
 		<?php require_once('php/head.php'); ?>
+		<?php 
+			if($_SESSION ['login'] === 'admin'){
+				echo '<meta HTTP-EQUIV="Refresh" CONTENT="60; URL=index.php">';
+			}
+		?>
+		 
+
 		<title>Page Principale</title>
 </head>
 <body>
