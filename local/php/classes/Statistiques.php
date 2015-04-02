@@ -50,18 +50,15 @@ class Statistiques {
 	/*
 	 * Donne les plus jeunes participants d'un type de parcours et d'un sexe donné
 	 * @param : un type de parcours, un sexe et un entier (optionnel)
-	 * @return : un tableau associatif (nom, prenom, age)
+	 * @return : un tableau de tableaux associatifs (nom, prenom, age)
 	 */
 	public function getYounger($type, $sexe, $number = 5) {
 		$stmt = $this->pdo->query("SELECT nom, prenom, TIMESTAMPDIFF(YEAR, dateNaissance, CURDATE()) AS age
 								   FROM INSCRIPTIONS JOIN PARCOURS ON idParcours=parcours
 								   WHERE type='$type' AND sexe='$sexe' ORDER BY dateNaissance DESC LIMIT $number");
 		
-		foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-			$res['nom'] = $row['nom'];
-			$res['prenom'] = $row['prenom'];
-			$res['age'] = $row['age'];
-		}
+		foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+			$res[] = array('nom' => $row['nom'], 'prenom' => $row['prenom'], 'age' => $row['age']);			
 		return $res;		
 	}
 	

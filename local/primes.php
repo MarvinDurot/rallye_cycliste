@@ -26,8 +26,8 @@ function afficherLesPlusJeunes($type, $sexe) {
 	global $stats;
 	$personnes = $stats->getYounger($type, $sexe);
 	echo '<td colspan="2">';
-	foreach ($personnes as $key => $value)
-		echo '<p>', $personnes['nom'], " ", $personnes['prenom'], " −−> ", $personnes['age'], " ans</p>";
+	foreach ($personnes as $personne)
+		echo '<p>', $personne['nom'], " ", $personne['prenom'], " −−> ", $personne['age'], " ans</p>";
 	echo "</td>";
 }
 ?>
