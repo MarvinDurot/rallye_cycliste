@@ -41,7 +41,7 @@ $action = $_POST ['action'];
 $class = $_POST ['class'];
 $dao = $_POST ['dao'];
 
-if (! contains ( $action, $functions )) {
+if (! in_array( $action, $functions )) {
 	echo json_encode ( false );
 	exit ( 0 );
 }
@@ -184,16 +184,5 @@ function checkData() {
 			return (count ( $fields ) === 1);
 			break;
 	}
-}
-
-/*
- * Vérifie si une chaine est présente dans un tableau
- */
-function contains($string, $array) {
-	foreach ( $array as $a ) {
-		if (stripos ( $string, $a ) !== false)
-			return true;
-	}
-	return false;
 }
 ?>
