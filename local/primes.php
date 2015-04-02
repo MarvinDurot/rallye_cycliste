@@ -25,10 +25,14 @@ function afficherMax($complementRequete = "") {
 function afficherLesPlusJeunes($type, $sexe) {
 	global $stats;
 	$personnes = $stats->getYounger($type, $sexe);
-	echo '<td colspan="2">';
-	foreach ($personnes as $personne)
-		echo '<p>', $personne['nom'], " ", $personne['prenom'], " −−> ", $personne['age'], " ans</p>";
-	echo "</td>";
+	$noms = ""; $ages = "";
+	foreach ($personnes as $personne) {
+		$noms .= '<p>'.$personne['nom'].' '.$personne['prenom'].'</p>';
+		$ages .= '<p>'.$personne['age'].' ans</p>';
+	}	
+		
+	echo '<td>', $noms, '</td>';
+	echo '<td>', $ages, '</td>';
 }
 ?>
 
@@ -52,7 +56,7 @@ function afficherLesPlusJeunes($type, $sexe) {
 					<caption class="font-2">ROUTE</caption>
 					<thead>
 						<tr>	
-							<th>Récompenses</th>
+							<th>Récompense</th>
 							<th>Nom</th>
 							<th>Nombre</th>					
 						</tr>
