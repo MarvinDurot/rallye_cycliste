@@ -30,21 +30,6 @@ CREATE TABLE INSCRIPTIONS (
 	PRIMARY KEY (idInscription)
 ) ENGINE=InnoDB;
 
-CREATE TABLE PREINSCRIPTIONS (
-	idPreInscription int(11) NOT NULL AUTO_INCREMENT,
-	estArrive BOOLEAN NOT NULL,
-	nom VARCHAR(30),
-	prenom VARCHAR(30),
-	sexe CHAR(1),
-	dateNaissance DATE,
-	federation VARCHAR (6),
-	clubOuVille VARCHAR (40),
-	departement INT,
-	parcours int(11) NOT NULL,
-	inscriveur VARCHAR (50) NOT NULL,
-	PRIMARY KEY (idPreInscription)
-) ENGINE=InnoDB;
-
 ALTER TABLE INSCRIPTIONS
   ADD CONSTRAINT inscription_1 FOREIGN KEY (parcours) REFERENCES PARCOURS (idParcours),
   ADD CONSTRAINT inscription_2 FOREIGN KEY (inscriveur) REFERENCES UTILISATEURS (login);
