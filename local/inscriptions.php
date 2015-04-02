@@ -108,8 +108,8 @@ require_once ('php/session.php');
 									<label>Parcours</label> <select class="sel" id="parcours"></select>
 								</div>
 
-								<input type="text" value="<?php echo $_SESSION['login']; ?>"
-									name="inscriveur" id="inscriveur" class="hide">
+								<input type="hidden" value="<?php echo $_SESSION['login']; ?>"
+									name="inscriveur" id="inscriveur">
 
 							</div>
 						</div>
