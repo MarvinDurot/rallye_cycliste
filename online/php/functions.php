@@ -8,10 +8,11 @@ function __autoload($class) {
 	require_once "php/classes/$class.php";
 }
 
-// Chargement des DAO
+// Chargement des DAO et déclaration des variables globales
 $utilisateurs = new UtilisateursDAO ( MaBD::getInstance () );
 $inscriptions = new PreInscriptionsDAO ( MaBD::getInstance () );
 $parcours = new ParcoursDAO(MaBD::getInstance());
+$federations = [ 'NL', 'FFCT', 'FFC', 'UFOLEP', 'FSGT', 'FFTri' ];
 
 /*
  * Teste si un email est déjà présent dans la base
@@ -133,25 +134,58 @@ function afficherPreInscriptions($email) {
 	global $inscriptions;
 	$liste = $inscriptions->getPreInscritpionParEmail ( $email );
 	if ($liste !== null) {
-		echo '<table class="table table-condensed">
-					<thead>
-						<tr>
-							<th>Nom</th>
-							<th>Prénom</th>
-							<th>Sexe</th>
-							<th>Date de naissance</th>
-							<th>Fédération</th>
-							<th>Club ou Ville</th>
-							<th>Département</th>
-							<th>Parcours</th>
-						</tr>
-					</thead>
-					<tbody class="no-border">';
-		foreach ( $liste as $p )
-			$p->toTableRowForm ();
-		echo '</tbody>					
-				</table>';
+		foreach ( $liste as $i )
+			$i->toForm();
 	}
+}
+
+/*
+ * Charge les parcours dans un select
+ */
+function chargerParcours() {
+	global $parcours;
+	foreach ($parcours->getAll() as $p)
+		$p->toOption();
+}
+
+/*
+ * Charge les fédérations dans un select
+ */
+function chargerFederations() {
+	global $federations;
+	foreach ($federations as $f)
+		echo '<option value="', $f, '">', $f, '</option>';
+}
+
+/*
+ * Supprimer une pré-inscription dans la base
+ * @param: l'id de la pré-inscription à supprimer
+ */
+function supprimerInscription($id) {
+	global $inscriptions;
+	$i = $inscriptions->getOne($id);
+	$inscriptions->delete($i);
+}
+
+/*
+ * Ajoute une pré-inscription dans la base
+ * @param: l'id de la pré-inscription à supprimer
+ */
+function ajouterInscription() {
+	global $inscriptions;
+	$_POST['idPreInscription'] = DAO::UNKNOWN_ID;
+	foreach ($inscriptions->getColumnNames() as $cName)
+		$fields[$cName] = $_POST[$cName];
+	$obj = new PreInscription($fields);
+	$inscriptions->insert($obj);
+}
+
+/*
+ * Vérifie les champs département et date de naissance
+ */
+function checkInputs() {
+	// TODO : à compléter
+	return true;
 }
 
 /*
