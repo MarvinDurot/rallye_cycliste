@@ -197,9 +197,7 @@ function checkInputs() {
 	if ($_POST['departement'] <= 0 || $_POST['departement'] > 102)
 		return false;
 	$date = explode("-", $_POST['dateNaissance']);
-	if (!checkdate($date[1], $date[0], $date[2]))
-		return false;
-	return true;
+	return checkdate($date[1], $date[0], $date[2]);
 }
 
 /*
