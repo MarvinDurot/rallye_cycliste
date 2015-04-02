@@ -1,11 +1,8 @@
 TODO:
 
 Divers :
---> Impression stats
 --> Format date naissance
 --> Utiliser bootstrap pour le tri avec bibliothèque datatable (jquery)
---> Pb th/td dans stats parcours (participation.php)
---> Rafraichir les stats de l'admin régulièrement
 --> Réduire taille des champs page inscriptions
 
 Implémenter la page des utilisateurs (utilisateurs.php) :
@@ -18,6 +15,7 @@ Implémenter la page de gestion de la base de données (bdd.php) :
 --> Importer les préinscriptions
 
 Implémenter page de validation de préinscriptions (preinscriptions.php) ;
---> Ajouter des préinscriptions à partir d'un mail
---> Afficher récapitulatif avant ajout dans la base
---> Ne pas ajouter l'utilisateur dans la base local
+--> Mettre en forme le formulaire d'ajout d'un inscription
+--> Implémenter checkInputs() (functions.php)
+
+METTRE EN FORME VALIDATION DES PREINSCRIPTIONS
