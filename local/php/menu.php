@@ -38,8 +38,8 @@ function hideMenu() {
 					aria-expanded="false"> <span class="glyphicon glyphicon-cog">&nbsp;</span>
 						Configuration <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="bdd.php">Base de données</a></li>
-						<li><a href="utilisateurs.php">Utilisateurs</a></li>
+						<li class="hide"><a href="bdd.php">Base de données</a></li>
+						<li class="hide"><a href="utilisateurs.php">Utilisateurs</a></li>
 						<li><a href="parcours.php">Parcours</a></li>											
 					</ul></li>
 				<li><a href="?deco=true"><span class="glyphicon glyphicon-off">&nbsp;</span>Se

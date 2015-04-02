@@ -6,6 +6,10 @@ if ($_SESSION ['login'] !== 'admin') {
 	header ( "Location: login.php" );
 	exit ( 0 );
 }
+
+/*
+ * PAS FINI !!!!
+ */
 ?>
 
 <!DOCTYPE html>

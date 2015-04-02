@@ -1,5 +1,8 @@
 <?php
 require_once ('php/session.php');
+/*
+ * PAS FINI !!!!
+ */
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +18,8 @@ require_once ('php/session.php');
 			<div class="page-header center-text">
 				<h1>Gestion de la base de données</h1>
 			</div>
+		</div>
+		<div class="row">
 		</div>
 	</div>
 </body>
