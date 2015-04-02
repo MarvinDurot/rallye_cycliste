@@ -1,7 +1,6 @@
 TODO:
 
 Divers :
---> Format date naissance
 --> Utiliser bootstrap pour le tri avec bibliothèque datatable (jquery)
 --> Réduire taille des champs page inscriptions
 
@@ -13,9 +12,5 @@ Implémenter la page des utilisateurs (utilisateurs.php) :
 Implémenter la page de gestion de la base de données (bdd.php) :
 --> Vider les inscriptions (Confirmation avant suppression !)
 --> Importer les préinscriptions
-
-Implémenter page de validation de préinscriptions (preinscriptions.php) ;
---> Mettre en forme le formulaire d'ajout d'un inscription
---> Implémenter checkInputs() (functions.php)
 
 METTRE EN FORME VALIDATION DES PREINSCRIPTIONS

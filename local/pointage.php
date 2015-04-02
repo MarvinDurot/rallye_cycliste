@@ -21,7 +21,7 @@ require_once ('php/session.php');
 			<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
 				<table class="table table-bordered center-table">
 					<thead>
-						<tr class="sort-buttons">
+						<tr class="sort-buttons success">
 							<th><span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Nom</th>
 							<th><span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Prénom</th>
 							<th><span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Sexe</th>

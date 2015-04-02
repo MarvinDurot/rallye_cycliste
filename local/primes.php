@@ -52,10 +52,10 @@ function afficherLesPlusJeunes($type, $sexe) {
 		</div>
 		<div class="row">
 			<div class="col-lg-offset-1 col-lg-5">
-				<table class="table table-condensed">
+				<table class="table table-bordered">
 					<caption class="font-2">ROUTE</caption>
 					<thead>
-						<tr>	
+						<tr class="success">	
 							<th>Récompense</th>
 							<th>Nom</th>
 							<th>Nombre</th>					
@@ -90,10 +90,10 @@ function afficherLesPlusJeunes($type, $sexe) {
 				</table>
 				</div>
 				<div class="col-lg-5">
-				<table class="table table-condensed">
+				<table class="table table-bordered">
 					<caption class="font-2">VTT</caption>
 					<thead>
-						<tr>	
+						<tr class="success">	
 							<th>Récompenses</th>
 							<th>Nom</th>
 							<th>Nombre</th>					
