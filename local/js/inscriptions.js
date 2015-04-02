@@ -22,7 +22,7 @@ function addLine(inscription) {
 	tds.eq(0).text(inscription.nom);
 	tds.eq(1).text(inscription.prenom);
 	tds.eq(2).text(inscription.sexe);
-	tds.eq(3).text(inscription.dateNaissance);
+	tds.eq(3).text(formatDate(inscription.dateNaissance));
 	tds.eq(4).text(inscription.federation);
 	tds.eq(5).text(inscription.clubOuVille);
 	tds.eq(6).text(inscription.departement);
@@ -152,7 +152,7 @@ function copier(inscription) {
 	inputs[0].val(inscription.nom);
 	inputs[1].val(inscription.prenom);
 	inputs[2].val(inscription.sexe);
-	inputs[3].val(inscription.dateNaissance);
+	inputs[3].val(formatDate(inscription.dateNaissance));
 	inputs[4].val(inscription.federation);
 	inputs[5].val(inscription.clubOuVille);
 	inputs[6].val(inscription.departement);
