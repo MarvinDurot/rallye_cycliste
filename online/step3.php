@@ -87,7 +87,7 @@ if (isset ( $_POST ['valider'] )) {
 					<div class="form-group">
 						<label>Date de naissance :</label> <input
 							class="form-control input-sm" name="dateNaissance" type="date"
-							placeholder="AAAA-MM-JJ" required>
+							placeholder="JJ-MM-AAAA" required>
 					</div>
 					<div class="form-group">
 						<label>Fédé. :</label> <select class="sel" name="federation">

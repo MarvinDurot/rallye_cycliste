@@ -13,9 +13,9 @@ $utilisateurs = new UtilisateursDAO ( MaBD::getInstance () );
 $inscriptions = new PreInscriptionsDAO ( MaBD::getInstance () );
 $parcours = new ParcoursDAO ( MaBD::getInstance () );
 
-// Déclaration des constantes
-const PRIX = 10;
-const FEDERATIONS = [ 
+// Déclaration des variables globales
+$prix = 10;
+$federations = [ 
 		'NL',
 		'FFCT',
 		'FFC',
@@ -161,7 +161,8 @@ function chargerParcours() {
  * Charge les fédérations dans un select
  */
 function chargerFederations() {
-	foreach ( FEDERATIONS as $f )
+	global $federations;
+	foreach ( $federations as $f )
 		echo '<option value="', $f, '">', $f, '</option>';
 }
 
@@ -182,6 +183,7 @@ function supprimerInscription($id) {
 function ajouterInscription() {
 	global $inscriptions;
 	$_POST ['idPreInscription'] = DAO::UNKNOWN_ID;
+	$_POST['dateNaissance'] = formatDate($_POST['dateNaissance']);
 	foreach ( $inscriptions->getColumnNames () as $cName )
 		$fields [$cName] = $_POST [$cName];
 	$obj = new PreInscription ( $fields );
@@ -192,23 +194,38 @@ function ajouterInscription() {
  * Vérifie les champs département et date de naissance
  */
 function checkInputs() {
-	// TODO : à compléter
+	if ($_POST['departement'] <= 0 || $_POST['departement'] > 102)
+		return false;
+	$date = explode("-", $_POST['dateNaissance']);
+	if (!checkdate($date[1], $date[0], $date[2]))
+		return false;
 	return true;
+}
+
+/*
+ * Formate une date JJ/MM/AAAA en date pour SQL
+ * @param: une date (string)
+ */
+function formatDate($date) {
+	$date = explode("-", $date);
+	$new = $date[2].'-'.$date[1].'-'.$date[0];
+	echo $new;
+	return $new;
 }
 
 /*
  * Envoie un email avec le recapitulatif des pré-inscriptions de l'utilisateur et le prix total
  */
 function envoyerMailRecap($email) {
-	global $inscriptions;
+	global $inscriptions, $prix;
 	$prix = 0;
 	$sujet = "Inscription(s) au Rallye cycliste de la fête des vins";
 	$message = "Bonjour,\n\nVoici le récapitulatif de vos pré-inscriptions :\n-----\n";
 	foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i ) {
 		$message .= $i;
-		$prix = $prix + PRIX;
+		$total = $total + $prix;
 	}
-	$message .= "\n=== Prix TOTAL ===\n$prix euros\n\n";
+	$message .= "\n=== Prix TOTAL ===\n$total euros\n\n";
 	$message .= "\nN'oubliez pas de vous présentez au poste d'inscription avec votre adresse mail !\n";
 	$message .= "\nCordialement.";
 	mail ( $email, $sujet, $message );
