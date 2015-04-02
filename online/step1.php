@@ -1,26 +1,21 @@
 <?php
-// Autochargement des classes
-function __autoload($class) {
-	require_once "php/classes/$class.php";
-}
-
+// Teste la session
 session_start();
 if (isset($_SESSION['email'])) {
 	header("Location: step2.php");
 	exit(0);
 }
 
+// Récupération des fonctions principales
+require_once('php/functions.php');
+
 // Initialisation des erreurs
 $_POST ['erreur'] = false;
 
-// Récupération du DAO
-$utilisateurs = new UtilisateursDAO ( MaBD::getInstance () );
-
-// Gestion des événements //
-
 if (isset($_POST['valider'])) {
 	if ($_POST['email'] === $_POST['email2']) {
-		if (! testDoublon ( $_POST['email'] )) {
+		if (! test ( $_POST['email'] )) {
+			ajouterUtilisateur($_POST['email']);
 			$_SESSION['email'] = $_POST['email'];
 			header("Location: step2.php");
 			exit(0);
@@ -31,39 +26,6 @@ if (isset($_POST['valider'])) {
 	} else {
 		$_POST ['erreur'] = true;
 		$_POST ['message'] = "Les emails ne correspondent pas !";
-	}
-}
-
-if (isset($_POST['renvoyer'])) {
-	envoyerMailValidation($email);
-	$_POST ['message'] = "Un nouveau code de validation vous a été envoyé !";
-}
-
-// Fonctions //
-
-/*
- * Teste si un email est déjà présent dans la base
- * @param: un email
- * @return: un booléen
- */
-function testDoublon($mail) {
-	global $utilisateurs;
-	$u = $utilisateurs->getOne ( $mail );
-	if ($u === null)
-		return false;
-	else
-		return true;
-}
-
-/*
- * Affiche un message d'erreur ou d'information
- */
-function afficherMessage() {
-	if (isset ( $_POST ['message'] ) && isset ( $_POST ['erreur'] )) {
-		if ($_POST ['erreur'])
-			echo '<div id="erreur" class="alert alert-danger center-text" role="alert">', $_POST ['message'], '</div>';
-		else
-			echo '<div id="info" class="alert alert-info center-text" role="alert">', $_POST ['message'], '</div>';
 	}
 }
 ?>
