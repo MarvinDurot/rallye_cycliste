@@ -7,7 +7,7 @@ class Parcours extends TableObject {
 	/*
 	 * Transforme un parcours en option dans un select
 	 */
-    public function toSelect() {
+    public function toOption() {
     	echo '<option value="', $this->idParcours, '">', $this->type, $this->distance, '</option>'; 
     }   
     
