@@ -114,7 +114,7 @@ function ajouter() {
 			nom : inputs[0].val(),
 			prenom : inputs[1].val(),
 			sexe : inputs[2].val(),
-			dateNaissance : inputs[3].val(),
+			dateNaissance : formatDate(inputs[3].val()),
 			federation : inputs[4].val(),
 			clubOuVille : inputs[5].val(),
 			departement : parseInt(inputs[6].val()),
@@ -191,17 +191,26 @@ function checkInputs() {
 	}
 	// On vérifie la date (AAAA-MM-JJ)
 	var date_arr = inputs[3].val().split('-');
-	d = new Date(date_arr[0], parseInt(date_arr[1]) - 1, date_arr[2]);
-	if (d.getFullYear() != date_arr[0]
+	d = new Date(date_arr[2], parseInt(date_arr[1]) - 1, date_arr[0]);
+	if (d.getFullYear() != date_arr[2]
 			|| parseInt(d.getMonth()) + 1 != date_arr[1]
-			|| d.getDate() != date_arr[2])
+			|| d.getDate() != date_arr[0])
 		return false;
 
 	// On vérifie qu'il s'agit bien d'un département
-	if (!(inputs[6].val() > 0 && inputs[6].val() < 96))
+	if (parseInt(inputs[6].val()) <= 0 || parseInt(inputs[6].val()) > 102)
 		return false;
 
 	return true;
+}
+
+/*
+ * Transforme une date JJ-MM-AAAA en date compatible SQL
+ * @param: une date
+ */
+function formatDate(date) {
+	date_arr = date.split('-');
+	return date_arr[2] + '-' + date_arr[1] + '-' + date_arr[0];
 }
 
 $(document).ready(

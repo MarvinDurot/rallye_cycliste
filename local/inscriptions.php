@@ -88,7 +88,7 @@ require_once ('php/session.php');
 								<div class="col-lg-2">
 									<label>Date de naissance</label> <input
 										class="form-control input-sm" id="date" name="date"
-										type="date" placeholder="AAAA-MM-JJ">
+										type="date" placeholder="JJ-MM-AAAA">
 								</div>
 
 								<div class="col-lg-1">
