@@ -21,6 +21,12 @@ class PreInscription extends TableObject {
 			  </tr>';
 	}
 	
+	public function __toString() {
+		$parcours = new ParcoursDAO(MaBD::getInstance());
+		$res = "- ".$this->nom." ".$this->prenom." : ".$parcours->getOne($this->parcours)."\n";
+		return $res;
+	}
+	
 	/*
 	 * Affiche une pré-inscription dans un formulaire en ligne
 	 */

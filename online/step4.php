@@ -22,8 +22,8 @@ if (isset ( $_POST ['retour'] )) {
 // Valider les pré-inscriptions
 if (isset ( $_POST ['valider'] )) {
 	envoyerMailRecap ($_SESSION['email']);
-	//header ( "Location: end.php" );
-	//exit ( 0 );
+	header ( "Location: end.php" );
+	exit ( 0 );
 }
 ?>
 

@@ -12,7 +12,10 @@ function __autoload($class) {
 $utilisateurs = new UtilisateursDAO ( MaBD::getInstance () );
 $inscriptions = new PreInscriptionsDAO ( MaBD::getInstance () );
 $parcours = new ParcoursDAO ( MaBD::getInstance () );
-$federations = [ 
+
+// Déclaration des constantes
+const PRIX = 10;
+const FEDERATIONS = [ 
 		'NL',
 		'FFCT',
 		'FFC',
@@ -84,7 +87,7 @@ function envoyerMailValidation($email) {
 	$message = "Voici le code qui vous permettra de valider votre email :\n";
 	$message .= $code;
 	echo $code;
-	// mail ( $email, $sujet, $message );
+	mail ( $email, $sujet, $message );
 	return $code;
 }
 
@@ -158,8 +161,7 @@ function chargerParcours() {
  * Charge les fédérations dans un select
  */
 function chargerFederations() {
-	global $federations;
-	foreach ( $federations as $f )
+	foreach ( FEDERATIONS as $f )
 		echo '<option value="', $f, '">', $f, '</option>';
 }
 
@@ -192,6 +194,24 @@ function ajouterInscription() {
 function checkInputs() {
 	// TODO : à compléter
 	return true;
+}
+
+/*
+ * Envoie un email avec le recapitulatif des pré-inscriptions de l'utilisateur et le prix total
+ */
+function envoyerMailRecap($email) {
+	global $inscriptions;
+	$prix = 0;
+	$sujet = "Inscription(s) au Rallye cycliste de la fête des vins";
+	$message = "Bonjour,\n\nVoici le récapitulatif de vos pré-inscriptions :\n-----\n";
+	foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i ) {
+		$message .= $i;
+		$prix = $prix + PRIX;
+	}
+	$message .= "\n=== Prix TOTAL ===\n$prix euros\n\n";
+	$message .= "\nN'oubliez pas de vous présentez au poste d'inscription avec votre adresse mail !\n";
+	$message .= "\nCordialement.";
+	mail ( $email, $sujet, $message );
 }
 
 /*
