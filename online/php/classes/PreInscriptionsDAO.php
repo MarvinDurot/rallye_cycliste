@@ -9,7 +9,7 @@ class PreInscriptionsDAO extends DAO {
      * @param: l'email de l'inscriveur
      * @return: un tableau de pré-inscriptions (TableObject)
      */
-    public function getPreInscritpionParEmail($inscriveur){
+    public function getPreInscriptionsParEmail($inscriveur){
     	$res = array();
     	$stmt = $this->pdo->prepare("SELECT * FROM PREINSCRIPTIONS WHERE inscriveur=?");
     	$stmt->execute(array($inscriveur));

@@ -143,8 +143,53 @@ function genererCode() {
 function afficherPreInscriptions($email) {
 	global $inscriptions;
 	if (checkRef ( $email )) {
-		foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i )
+		echo '<div class="row center-text">
+					<div class="col-lg-12">
+						<div class="col-lg-2">
+							<p>
+								<strong>Nom</strong>
+							</p>
+						</div>
+						<div class="col-lg-2">
+							<p>
+								<strong>Date Naiss.</strong>
+							</p>
+						</div>
+						<div class="col-lg-1">
+							<p>
+								<strong>Sexe</strong>
+							</p>
+						</div>
+						<div class="col-lg-1">
+							<p>
+								<strong>Fédé.</strong>
+							</p>
+						</div>
+						<div class="col-lg-2">
+							<p>
+								<strong>Club/Ville</strong>
+							</p>
+						</div>
+						<div class="col-lg-1">
+							<p>
+								<strong>Dép.</strong>
+							</p>
+						</div>
+						<div class="col-lg-2">
+							<p>
+								<strong>Parcours</strong>
+							</p>
+						</div>
+					</div>
+				</div>';
+		foreach ( $inscriptions->getPreInscriptionsParEmail ( $email ) as $i )
 			$i->toForm ();
+		echo '<form method="POST" action="step3.php">
+					<div class="pull-right">
+						<button type="submit" class="btn btn-primary" name="valider[]">Valider
+							tout</button>
+					</div>
+				</form>';
 	}
 }
 
@@ -219,7 +264,7 @@ function envoyerMailRecap($email) {
 	$prix = 0;
 	$sujet = "Inscription(s) au Rallye cycliste de la fête des vins";
 	$message = "Bonjour,\n\nVoici le récapitulatif de vos pré-inscriptions :\n-----\n";
-	foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i ) {
+	foreach ( $inscriptions->getPreInscriptionsParEmail ( $email ) as $i ) {
 		$message .= $i;
 		$total = $total + $prix;
 	}
@@ -236,7 +281,7 @@ function envoyerMailRecap($email) {
 function afficherRecap($email) {
 	global $inscriptions;
 	if (checkRef ( $email )) {
-		foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i )
+		foreach ( $inscriptions->getPreInscriptionsParEmail ( $email ) as $i )
 			$i->toTableRow ();
 	}
 }
@@ -248,8 +293,8 @@ function afficherRecap($email) {
  */
 function checkRef($email) {
 	global $inscriptions;
-	$liste = $inscriptions->getPreInscritpionParEmail ( $email );
-	if ($liste === null)
+	$liste = $inscriptions->getPreInscriptionsParEmail ( $email );
+	if (empty($liste))
 		return false;
 	else
 		return true;

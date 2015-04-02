@@ -35,14 +35,9 @@ if (isset ( $_POST ['ajouter'] )) {
 
 // Valider les inscriptions
 if (isset ( $_POST ['valider'] )) {
-	if (checkRef ( $_SESSION ['email'] )) {
-		$_SESSION ['recap'] = true;
-		header ( "Location: step4.php" );
-		exit ( 0 );
-	} else {
-		$_POST ['erreur'] = true;
-		$_POST ['message'] = "Vous n'avez saisi aucune inscription !";
-	}
+	$_SESSION ['recap'] = true;
+	header ( "Location: step4.php" );
+	exit ( 0 );
 }
 ?>
 
@@ -61,8 +56,7 @@ if (isset ( $_POST ['valider'] )) {
 					<div class="progress">
 						<div class="progress-bar progress-bar-striped active"
 							role="progressbar" aria-valuenow="75" aria-valuemin="0"
-							aria-valuemax="100" style="width: 75%">							
-						</div>
+							aria-valuemax="100" style="width: 75%"></div>
 					</div>
 				</div>
 			</div>
@@ -117,52 +111,14 @@ if (isset ( $_POST ['valider'] )) {
 				</form>
 			</div>
 			<div class="col-lg-7">
-				<div class="row center-text">
-					<div class="col-lg-12">
-						<div class="col-lg-2">
-							<p>
-								<strong>Nom</strong>
-							</p>
-						</div>
-						<div class="col-lg-2">
-							<p>
-								<strong>Date Naiss.</strong>
-							</p>
-						</div>
-						<div class="col-lg-1">
-							<p>
-								<strong>Sexe</strong>
-							</p>
-						</div>
-						<div class="col-lg-1">
-							<p>
-								<strong>Fédé.</strong>
-							</p>
-						</div>
-						<div class="col-lg-2">
-							<p>
-								<strong>Club/Ville</strong>
-							</p>
-						</div>
-						<div class="col-lg-1">
-							<p>
-								<strong>Dép.</strong>
-							</p>
-						</div>
-						<div class="col-lg-2">
-							<p>
-								<strong>Parcours</strong>
-							</p>
-						</div>
+				<div class="row">
+					<?php afficherPreInscriptions($_SESSION['email']); ?>
+				</div>
+				<div class="row vertical-offset-20">
+					<div class="col-lg-offset-2 col-lg-8">
+						<?php afficherMessage(); ?>
 					</div>
 				</div>
-				<?php afficherPreInscriptions($_SESSION['email']); ?>
-				<form method="POST" action="step3.php">
-					<div class="pull-right">
-						<button type="submit" class="btn btn-primary" name="valider[]">Valider
-							tout</button>
-					</div>
-				</form>
 			</div>
 		</div>
 
