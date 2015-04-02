@@ -14,7 +14,7 @@ INSERT INTO PARCOURS (idParcours, distance, type) VALUES
 (NULL, 110, 'ROUTE'),
 (NULL, 120, 'ROUTE');
 
-INSERT INTO UTILISATEURS (login, mdp) VALUES
+INSERT INTO UTILISATEURS (email) VALUES
 ('user1@mail.com', 'cle01'),
 ('user2@mail.com', 'cle02'),
 ('user3@mail.com', 'cle03'),
