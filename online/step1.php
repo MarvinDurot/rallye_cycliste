@@ -42,6 +42,12 @@ if (isset($_POST['valider'])) {
 			<div class="col-lg-offset-1">
 				<div class="page-header">
 					<h2>Etape 1/4 - Saisie de l'adresse email</h2>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped active"
+							role="progressbar" aria-valuenow="10" aria-valuemin="0"
+							aria-valuemax="100" style="width: 10%">							
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

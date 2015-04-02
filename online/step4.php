@@ -39,6 +39,12 @@ if (isset ( $_POST ['valider'] )) {
 			<div class="col-lg-offset-1">
 				<div class="page-header">
 					<h2>Etape 4/4 - Validation des pré-inscriptions</h2>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped active"
+							role="progressbar" aria-valuenow="90" aria-valuemin="0"
+							aria-valuemax="100" style="width: 90%">							
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -58,7 +64,7 @@ if (isset ( $_POST ['valider'] )) {
 						</tr>
 					</thead>
 					<tbody>
-						<?php //afficherRecap(); ?>
+						<?php afficherRecap($_SESSION['email']); ?>
 					</tbody>
 				</table>
 				<form action="step4.php" method="POST">
@@ -72,7 +78,7 @@ if (isset ( $_POST ['valider'] )) {
 			</div>
 		</div>
 
-		<div id="message" class="row vertical-offset-50">
+		<div class="row vertical-offset-50">
 			<div class="col-lg-12">
 				<?php afficherMessage(); ?>
 			</div>

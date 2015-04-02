@@ -1,7 +1,3 @@
-<?php
-require_once ('php/session.php');
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +6,7 @@ require_once ('php/session.php');
 </head>
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row vertical-offset-50">
 			<div class="col-lg-offset-2 col-lg-8">
 				<img class="img-responsive img-circle" src="img/banner.png">
 			</div>
@@ -21,6 +17,7 @@ require_once ('php/session.php');
 				<p>Cet outil permet de s'inscrire au Rallye de la fête des vins de
 					St Peray.</p>
 				<p>Pour démarrer l'inscription appuyez sur le bouton ci-dessous.</p>
+				<br>
 				<p>
 					<a class="btn btn-primary btn-lg" href="step1.php" role="button" id="start">Commencer</a>
 				</p>
