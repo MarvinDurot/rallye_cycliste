@@ -11,8 +11,15 @@ function __autoload($class) {
 // Chargement des DAO et déclaration des variables globales
 $utilisateurs = new UtilisateursDAO ( MaBD::getInstance () );
 $inscriptions = new PreInscriptionsDAO ( MaBD::getInstance () );
-$parcours = new ParcoursDAO(MaBD::getInstance());
-$federations = [ 'NL', 'FFCT', 'FFC', 'UFOLEP', 'FSGT', 'FFTri' ];
+$parcours = new ParcoursDAO ( MaBD::getInstance () );
+$federations = [ 
+		'NL',
+		'FFCT',
+		'FFC',
+		'UFOLEP',
+		'FSGT',
+		'FFTri' 
+];
 
 /*
  * Teste si un email est déjà présent dans la base
@@ -132,10 +139,9 @@ function genererCode() {
  */
 function afficherPreInscriptions($email) {
 	global $inscriptions;
-	$liste = $inscriptions->getPreInscritpionParEmail ( $email );
-	if ($liste !== null) {
-		foreach ( $liste as $i )
-			$i->toForm();
+	if (checkRef ( $email )) {
+		foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i )
+			$i->toForm ();
 	}
 }
 
@@ -144,8 +150,8 @@ function afficherPreInscriptions($email) {
  */
 function chargerParcours() {
 	global $parcours;
-	foreach ($parcours->getAll() as $p)
-		$p->toOption();
+	foreach ( $parcours->getAll () as $p )
+		$p->toOption ();
 }
 
 /*
@@ -153,7 +159,7 @@ function chargerParcours() {
  */
 function chargerFederations() {
 	global $federations;
-	foreach ($federations as $f)
+	foreach ( $federations as $f )
 		echo '<option value="', $f, '">', $f, '</option>';
 }
 
@@ -163,8 +169,8 @@ function chargerFederations() {
  */
 function supprimerInscription($id) {
 	global $inscriptions;
-	$i = $inscriptions->getOne($id);
-	$inscriptions->delete($i);
+	$i = $inscriptions->getOne ( $id );
+	$inscriptions->delete ( $i );
 }
 
 /*
@@ -173,11 +179,11 @@ function supprimerInscription($id) {
  */
 function ajouterInscription() {
 	global $inscriptions;
-	$_POST['idPreInscription'] = DAO::UNKNOWN_ID;
-	foreach ($inscriptions->getColumnNames() as $cName)
-		$fields[$cName] = $_POST[$cName];
-	$obj = new PreInscription($fields);
-	$inscriptions->insert($obj);
+	$_POST ['idPreInscription'] = DAO::UNKNOWN_ID;
+	foreach ( $inscriptions->getColumnNames () as $cName )
+		$fields [$cName] = $_POST [$cName];
+	$obj = new PreInscription ( $fields );
+	$inscriptions->insert ( $obj );
 }
 
 /*
@@ -186,6 +192,32 @@ function ajouterInscription() {
 function checkInputs() {
 	// TODO : à compléter
 	return true;
+}
+
+/*
+ * Affiche le récapitulatif des pré-inscriptions d'un utilisateur
+ * @param: un email
+ */
+function afficherRecap($email) {
+	global $inscriptions;
+	if (checkRef ( $email )) {
+		foreach ( $inscriptions->getPreInscritpionParEmail ( $email ) as $i )
+			$i->toTableRow ();
+	}
+}
+
+/*
+ * Vérifie si un utilisateur dispose d'au moins une pré-inscription dans la base
+ * @param: un email
+ * @return : un booléen
+ */
+function checkRef($email) {
+	global $inscriptions;
+	$liste = $inscriptions->getPreInscritpionParEmail ( $email );
+	if ($liste === null)
+		return false;
+	else
+		return true;
 }
 
 /*
