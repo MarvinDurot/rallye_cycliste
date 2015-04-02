@@ -10,20 +10,22 @@
 			<div class="col-lg-offset-1">
 				<div class="page-header">
 					<h1><span class="glyphicon glyphicon-ok">&nbsp;</span>Félicitation !</h1>
-					<p>
+					<p><i>
 						Vous avez fini le processus d'inscription en ligne. <br> Un mail
 						récapitulant toutes vos pré-inscriptions vous a été envoyé.
-					</p>
+					</i></p>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-offset-1">
-				<h2>Pour que vos pré-inscriptions soient prises en compte le jour de l'inscription :</h2>
-				<p>1- Présentez-vous à un poste d'inscription </p>
-				<p>2- Donnez votre adresse email au bénévole </p>
-				<p>3- Payez vos droits d'inscription </p>
-				<p>4- Pédalez ! </p>
+				<h2><span class="glyphicon glyphicon-hand-right">&nbsp;</span>Le Jour J</h2>
+				<ol class="font-1">
+				<li>Présentez-vous à un poste d'inscription</li>
+				<li>Donnez votre adresse email au bénévole</li>
+				<li>Payez vos droits d'inscription</li>
+				<li>Pédalez !</li>
+				</ol>
 			</div>
 		</div>
 	</div>

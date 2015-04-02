@@ -61,6 +61,10 @@ table > tfoot> tr {
     text-align: center;
 }
 
+.font-1 {
+	font-size: 1.2em;
+}
+
 .font-2 {
 	font-size: 1.5em;
 }
