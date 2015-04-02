@@ -1,11 +1,15 @@
 <?php
 class Utilisateur extends TableObject {
 	
-	static public $keyFieldsNames = array('login'); // par défaut un seul champ
+	static public $keyFieldsNames = array('email'); // par défaut un seul champ
 	public $hasAutoIncrementedKey = false;
 	
-    public function __tostring() {
-         return $this->login;
-    }
+	public function valider() {
+		$this->valide = true;
+	}
+	
+	public function changeCode($code) {
+		$this->code = $code;
+	}
 }
 ?>
