@@ -121,12 +121,6 @@ if (isset ( $_POST ['valider'] )) {
 				</div>
 			</div>
 		</div>
-
-		<div class="row vertical-offset-50">
-			<div class="col-lg-12">
-				<?php afficherMessage(); ?>
-			</div>
-		</div>
 	</div>
 </body>
 </html>
