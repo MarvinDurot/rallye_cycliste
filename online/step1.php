@@ -14,8 +14,7 @@ $_POST ['erreur'] = false;
 
 if (isset($_POST['valider'])) {
 	if ($_POST['email'] === $_POST['email2']) {
-		if (! test ( $_POST['email'] )) {
-			ajouterUtilisateur($_POST['email']);
+		if (! test ( $_POST['email'] )) {			
 			$_SESSION['email'] = $_POST['email'];
 			header("Location: step2.php");
 			exit(0);

@@ -16,6 +16,10 @@ require_once ('php/functions.php');
 // Initialisation des erreurs
 $_POST ['erreur'] = false;
 
+// Récupération des champs précédement saisis
+$clubOuVille = (isset($_POST['clubOuVille'])) ? $_POST['clubOuVille'] : "";
+$departement = (isset($_POST['departement'])) ? $_POST['departement'] : "";
+
 // Supprimer une inscription
 if (isset ( $_POST ['delete'] )) {
 	supprimerInscription ( $_POST ['id'] );
@@ -73,7 +77,7 @@ if (isset ( $_POST ['valider'] )) {
 							name="prenom" type="text" placeholder="Prénom..." required>
 					</div>
 					<div class="form-group">
-						<label>Sexe :</label> <select class="sel" name="sexe">
+						<label>Sexe :</label> <select class="form-control" name="sexe">
 							<option value="H">H</option>
 							<option value="F">F</option>
 						</select>
@@ -84,21 +88,22 @@ if (isset ( $_POST ['valider'] )) {
 							placeholder="JJ-MM-AAAA" required>
 					</div>
 					<div class="form-group">
-						<label>Fédé. :</label> <select class="sel" name="federation">
+						<label>Fédé. :</label> <select class="form-control" name="federation">
 									<?php chargerFederations();?>
 								</select>
 					</div>
 					<div class="form-group">
 						<label>Ville ou Club</label> <input class="form-control input-sm"
 							name="clubOuVille" type="text" placeholder="Ville ou Club..."
-							required>
+							value="<?php echo $clubOuVille;?>" required>
 					</div>
 					<div class="form-group">
 						<label>Dép.</label> <input class="form-control input-sm"
-							name="departement" type="text" placeholder="Ex: 07" required>
+							name="departement" type="text" placeholder="Ex: 07"
+							value="<?php echo $departement;?>" required>
 					</div>
 					<div class="form-group">
-						<label>Parcours</label> <select class="sel" name="parcours">
+						<label>Parcours</label> <select class="form-control" name="parcours">
 									<?php chargerParcours();?>
 								</select>
 					</div>

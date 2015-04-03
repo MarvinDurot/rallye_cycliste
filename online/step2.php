@@ -18,10 +18,17 @@ require_once('php/functions.php');
 // Initialisation des erreurs
 $_POST['erreur'] = false;
 
-if (isset($_POST['confirmer'])) {
-	if (valide($email, $_POST['codeEnvoye'])) {
+/*
+ * Si le mail n'est pas encore présent dans la base on crée
+ * l'utilisateur en lui envoyant en mail de confirmation
+ */
+if (test($email) === false)
+	ajouterUtilisateur($email);
+	
+if (isset($_GET['code'])) {
+	if (valide($email, $_GET['code'])) {
 		valider($email);
-		$_SESSION['code'] = $_POST['codeEnvoye'];
+		$_SESSION['code'] = $_GET['code'];
 		header("Location: step3.php");
 		exit(0);
 	} else {
@@ -58,24 +65,18 @@ if (isset($_POST['renvoyer'])) {
 			</div>
 		</div>
 		<div class="row vertical-offset-50">
-			<div class="col-lg-offset-1 col-lg-3">
-				<p>Un email vient de vous être envoyé, veuillez saisir le code que
-					vous avez reçu.</p>
-				<form class="form" action="step2.php" method="POST">
-					<div class="form-group">
-						<label for="codeEnvoye">Code de validation :</label> <input
-							type="text" class="form-control" name="codeEnvoye" value="">
-					</div>
+			<div class="col-lg-offset-1 col-lg-4">
+				<p>Un email vient de vous être envoyé, suivez le lien pour continuer vos pré-inscriptions.</p>
+				<form class="form" action="step2.php" method="POST">					
 					<div class="pull-right">
 						<button type="submit" name="renvoyer[]" class="btn btn-success">Renvoyer
-							le code</button>
-						<button type="submit" name="confirmer[]" class="btn btn-success">Valider</button>
+							le code</button>						
 					</div>
 				</form>
 			</div>
 		</div>
 		<div id="message" class="row vertical-offset-50">
-			<div class="col-lg-offset-1 col-lg-3">
+			<div class="col-lg-offset-1 col-lg-4">
 				<?php afficherMessage(); ?>
 			</div>
 		</div>

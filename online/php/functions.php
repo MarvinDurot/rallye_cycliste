@@ -76,18 +76,20 @@ function ajouterUtilisateur($email) {
 }
 
 /*
- * Envoie un email de confirmation et
+ * Envoie un email de confirmation
  * @param: un email
  * @return: un code aléatoire de 8 caractères
  */
 function envoyerMailValidation($email) {
 	global $utilisateurs;
 	$code = genererCode ();
+	$entete = 'Content-Type: text/html; charset="utf8"'."\n";
+	$lien = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'].'?code='.$code;
 	$sujet = "Rallye de la fête du vin : code de validation";
-	$message = "Voici le code qui vous permettra de valider votre email :\n";
-	$message .= $code;
-	echo $code;
-	mail ( $email, $sujet, $message );
+	$message = 'Cliquez sur ce <a href="'.$lien.'">lien</a> pour valider
+			    votre adresse email et continuer vos pré-inscriptions.';
+	// echo $code;
+	mail ( $email, utf8_decode($sujet), $message, $entete );
 	return $code;
 }
 
@@ -252,7 +254,6 @@ function checkInputs() {
 function formatDate($date) {
 	$date = explode("-", $date);
 	$new = $date[2].'-'.$date[1].'-'.$date[0];
-	echo $new;
 	return $new;
 }
 
@@ -261,17 +262,17 @@ function formatDate($date) {
  */
 function envoyerMailRecap($email) {
 	global $inscriptions, $prix;
-	$prix = 0;
+	$total = 0;
 	$sujet = "Inscription(s) au Rallye cycliste de la fête des vins";
 	$message = "Bonjour,\n\nVoici le récapitulatif de vos pré-inscriptions :\n-----\n";
 	foreach ( $inscriptions->getPreInscriptionsParEmail ( $email ) as $i ) {
 		$message .= $i;
 		$total = $total + $prix;
 	}
-	$message .= "\n=== Prix TOTAL ===\n$total euros\n\n";
+	$message .= "\n=== Prix TOTAL ===\n".$total." euros\n\n";
 	$message .= "\nN'oubliez pas de vous présentez au poste d'inscription avec votre adresse mail !\n";
 	$message .= "\nCordialement.";
-	mail ( $email, $sujet, $message );
+	mail ( $email, utf8_decode($sujet), utf8_decode($message) );
 }
 
 /*
