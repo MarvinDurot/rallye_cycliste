@@ -68,7 +68,7 @@ class Statistiques {
 	 */
 	public function getClubs() {
 		$res = array();
-		$stmt = $this->pdo->query("select clubOuVille from INSCRIPTIONS WHERE federation <> 'NL'");
+		$stmt = $this->pdo->query("select clubOuVille from INSCRIPTIONS WHERE federation <> 'NL' GROUP BY clubOuVille");
 		foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
 			$res[] = $this->getClub($row['clubOuVille']);
 		}
