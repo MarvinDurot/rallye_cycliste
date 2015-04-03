@@ -2,7 +2,7 @@
 // Classe pour l'accès à la table UTILISATEUR
 class UtilisateursDAO extends DAO {
 	
-	protected $table = "UTILISATEURS";
+	protected $table = "USERS";
 	protected $class = "Utilisateur";
 	
 	// Teste si une paire email/code est dans la table Utilisateurs
