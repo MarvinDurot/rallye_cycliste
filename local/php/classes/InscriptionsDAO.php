@@ -10,7 +10,7 @@ class InscriptionsDAO extends DAO {
      */
     public function getLastSix($user) {
         $res = array();
-        $stmt = $this->pdo->prepare("SELECT * FROM INSCRIPTIONS WHERE inscriveur=? ORDER BY idInscription DESC LIMIT 6");
+        $stmt = $this->pdo->prepare("SELECT * FROM $this->table WHERE inscriveur=? ORDER BY idInscription DESC LIMIT 6");
         $stmt->execute(array($user));
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
         	$res[] = new Inscription($row);
@@ -22,7 +22,7 @@ class InscriptionsDAO extends DAO {
      * @return : un booléen
      */
     public function checkRef($parcoursOrUtilisateur) {
-    	$stmt = $this->pdo->prepare("SELECT * FROM INSCRIPTIONS WHERE parcours=? OR inscriveur=? LIMIT 1");
+    	$stmt = $this->pdo->prepare("SELECT * FROM $this->table WHERE parcours=? OR inscriveur=? LIMIT 1");
     	$stmt->execute(array($parcoursOrUtilisateur, $parcoursOrUtilisateur));
     	$res = $stmt->fetchAll(PDO::FETCH_ASSOC);    	
     	if (empty($res))

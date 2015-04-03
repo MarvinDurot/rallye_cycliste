@@ -10,7 +10,7 @@ class UtilisateursDAO extends DAO {
 	{
 		// stocké en md5
 		$password = md5($password);
-		$stmt = $this->pdo->prepare("SELECT * FROM UTILISATEURS WHERE login=? AND mdp=?");
+		$stmt = $this->pdo->prepare("SELECT * FROM $this->table WHERE login=? AND mdp=?");
 		$stmt->execute(array($login, $password));
 		$res = $stmt->fetch(PDO::FETCH_ASSOC);
 		if ($res === false)
