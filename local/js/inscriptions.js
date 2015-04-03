@@ -239,4 +239,13 @@ $(document).ready(
 				event.preventDefault();
 				ajouter();
 			});
+			
+			/*
+			inputs[6].blur(function() {
+				var indice = $(this).val();
+				if (!isNan(indice)) {
+					if (indice < clubs.length && indice >= 0)
+						$(this).val() = clubs[code];
+				}
+			}); */
 });
