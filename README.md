@@ -1,3 +1,3 @@
 # RallyeCycliste
 
-Projet de deuxième année de DUT Informatique, outil de gestion d'inscriptions en ligne d'un rallye cycliste.
+*Outil de gestion d'inscriptions à un rallye cycliste.*
